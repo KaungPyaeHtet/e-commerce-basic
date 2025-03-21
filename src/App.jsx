@@ -175,6 +175,7 @@ const App = () => {
 
   return (
     <Context.Provider value={contextValue}>
+      
       <div
         className={
           theme === "dark"
@@ -183,6 +184,7 @@ const App = () => {
         }
         data-bs-theme={theme === "dark" ? "dark" : "light"}
       >
+
         <BrowserRouter>
           <NavBar />
           <Routes>

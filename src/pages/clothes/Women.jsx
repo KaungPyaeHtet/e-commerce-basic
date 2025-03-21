@@ -7,10 +7,11 @@ const Women = () => {
   const navigate = useNavigate();
   const { setSelected, selected, items, currencyType, cart, handleToggleCart } =
     useContext(Context);
-    
+    const addCart = () => {
+      document.getElementById("addCart").play();
+    };
   useEffect(() => console.log(cart), [cart]);
 
-  console.log(items)
   return (
     <>
       {selected ? (
@@ -20,7 +21,9 @@ const Women = () => {
           <h3 className="text-center"> Women Clothes </h3>
           <div className="container border rounded p-4 m-3">
             <div>
-              {items.filter((item) => item.type==="women").map((item) => {
+              {items
+                .filter((item) => item.type === "women")
+                .map((item) => {
                   return (
                     <div
                       className="container border rounded p-4 m-3"
@@ -49,14 +52,20 @@ const Women = () => {
                       {item.cart ? (
                         <button
                           className="btn btn-success m-3"
-                          onClick={() => handleToggleCart(item.id)}
+                          onClick={() => {
+                            handleToggleCart(item.id);
+                            addCart();
+                          }}
                         >
                           <FaCartArrowDown />
                         </button>
                       ) : (
                         <button
                           className="btn btn-primary m-3"
-                          onClick={() => handleToggleCart(item.id)}
+                          onClick={() => {
+                            handleToggleCart(item.id);
+                            addCart();
+                          }}
                         >
                           <FaCartPlus />
                         </button>
@@ -73,8 +82,7 @@ const Women = () => {
                       </button>
                     </div>
                   );
-
-              })}
+                })}
             </div>
           </div>
         </div>

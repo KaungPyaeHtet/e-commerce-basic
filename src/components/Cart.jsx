@@ -13,10 +13,19 @@ const Cart = () => {
     cartTotal,
     currencyType,
   } = useContext(Context);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const removeAudio = () => {
+    document.getElementById("removeCart").play();
+  };
   return (
     <div>
-      <button className="btn btn-danger" onClick={() => setCart([])}>
+      <button
+        className="btn btn-danger"
+        onClick={() => {
+          setCart([]);
+          removeAudio();
+        }}
+      >
         <BsCartX /> <span> Remove Everything </span>{" "}
       </button>
 
@@ -50,7 +59,9 @@ const Cart = () => {
                   setSelected(true);
                   navigate(`/clothes/men/${item.id}`);
                 }}
-              >View</button>
+              >
+                View
+              </button>
             </div>
           );
         })}

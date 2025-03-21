@@ -14,11 +14,15 @@ const NavBar = () => {
     setCurrencyType,
     toggleIcon,
     theme,
-    cartCount
+    cartCount,
   } = useContext(Context);
-
+  const playAudio = () => {
+    document.getElementById('myAudio').play()
+  }
+  
   return (
     <Navbar expand="lg" className={`navbar navbar-${theme} bg-${theme}`}>
+
       <Container>
         <Navbar.Brand as={Link} to="/">
           Ozzy
@@ -26,7 +30,7 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="navbar-nav-dropdown" />
         <Navbar.Collapse id="navbar-nav-dropdown">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/" active>
+            <Nav.Link onClick={() => playAudio()}  as={Link} to="/" active>
               Home
             </Nav.Link>
 
@@ -36,7 +40,7 @@ const NavBar = () => {
             <Nav.Link as={Link} to="/blogs">
               Blogs
             </Nav.Link>
-            <NavDropdown title="Clothes" id="navbar-clothes">
+            <NavDropdown title="Clothes" onClick={() => playAudio()}  id="navbar-clothes">
               <NavDropdown.Item as={Link} to="/clothes">
                 General
               </NavDropdown.Item>
@@ -50,7 +54,7 @@ const NavBar = () => {
                 Child
               </NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Perfumes" id="navbar-perfume">
+            <NavDropdown onClick={() => playAudio()}  title="Perfumes" id="navbar-perfume">
               <NavDropdown.Item
                 as={Link}
                 to="/perfumes/women"
@@ -89,7 +93,7 @@ const NavBar = () => {
                 Convert to Kyat
               </Button>
             )}
-            <Nav.Link as={Link} to="/cart">
+            <Nav.Link as={Link} onClick={() => playAudio()} to="/cart">
               <FaCartShopping />
               {cartCount > 0 && (
                 <span
