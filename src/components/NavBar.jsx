@@ -4,14 +4,12 @@ import { Link } from "react-router-dom";
 import Context from "./Context";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
-import "../assets/NavBar.css";
 
 const NavBar = () => {
   const {
     dollarToKyat,
     kyatToDollar,
     currencyType,
-    setCurrencyType,
     toggleIcon,
     theme,
     cartCount,

@@ -24,10 +24,9 @@ const App = () => {
   const [cartTotal, setCartTotal] = useState(0);
   const [currencyType, setCurrencyType] = useState("kyats");
   const [selected, setSelected] = useState(false);
-  const [wishList, setWishList] = useState([]);
   const [cartCount, setCartCount] = useState();
   useEffect(() => {
-    setCartCount(cart.length);
+    setCartCount(cart.reduce((total, item) => total + item.amount, 0))
   }, [cart]);
   const [items, setItems] = useState([
     {
@@ -43,6 +42,8 @@ const App = () => {
       rating: 4.0,
       wish: false,
       cart: false,
+      amount: 1,
+      stock: 5,
     },
     {
       id: 2,
@@ -56,6 +57,8 @@ const App = () => {
       rating: 5.0,
       wish: false,
       cart: false,
+      amount: 1,
+      stock: 5,
     },
     {
       id: 3,
@@ -70,6 +73,8 @@ const App = () => {
       rating: 4.0,
       wish: false,
       cart: false,
+      amount: 1,
+      stock: 1,
     },
     {
       id: 4,
@@ -84,6 +89,8 @@ const App = () => {
       rating: 5.0,
       wish: false,
       cart: false,
+      amount: 1,
+      stock: 5,
     },
     {
       id: 5,
@@ -97,6 +104,8 @@ const App = () => {
       rating: 4.0,
       wish: false,
       cart: false,
+      amount: 1,
+      stock: 5,
     },
   ]);
   useEffect(() => console.log(selected), [selected]);
@@ -149,7 +158,10 @@ const App = () => {
     setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
   };
   useEffect(() => {
-    const total = cart.reduce((total, item) => total + item.price, 0);
+    const total = cart.reduce(
+      (total, item) => total + item.price * item.amount,
+      0
+    );
     setCartTotal(total);
   }, [cart, currencyType]);
 
@@ -175,7 +187,6 @@ const App = () => {
 
   return (
     <Context.Provider value={contextValue}>
-      
       <div
         className={
           theme === "dark"
@@ -184,7 +195,6 @@ const App = () => {
         }
         data-bs-theme={theme === "dark" ? "dark" : "light"}
       >
-
         <BrowserRouter>
           <NavBar />
           <Routes>
@@ -208,6 +218,21 @@ const App = () => {
             </Route>
             <Route path="*" element={<h1> 404 Error Not Found</h1>} />
           </Routes>
+          <footer
+            className={`border p-3 ${
+              theme === "dark" ? "bg-dark text-white" : "bg-white text-dark"
+            }`}
+            style={{
+              position: "fixed",
+              bottom: "0",
+              textAlign: "center",
+              width: "100%",
+            }}
+          >
+            <div className="container">
+              <span>&copy; 2025 Ozzy</span>
+            </div>
+          </footer>
         </BrowserRouter>
       </div>
     </Context.Provider>

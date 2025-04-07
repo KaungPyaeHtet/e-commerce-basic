@@ -4,15 +4,14 @@ import Context from "../components/Context";
 import {
   FaArrowLeft,
   FaStar,
-  FaShoppingCart,
   FaCartArrowDown,
   FaCartPlus,
 } from "react-icons/fa";
 
 const Cloth = () => {
-  let { tag } = useParams();
   const navigate = useNavigate();
   const { setSelected, items, handleToggleCart } = useContext(Context);
+  const { tag } = useParams()
   const item = items.find((item) => item.id === parseInt(tag));
   if (!item) {
     return <h1> 404 not found </h1>;
@@ -33,6 +32,7 @@ const Cloth = () => {
           <h3>{item.name}</h3>
           <p>{item.description}</p>
           <div>Price: {item.price}</div>
+          <p> Stock: {item.stock} </p>
           <div>
             Rating: {item.rating}{" "}
             {[...Array(item.rating)].map((_, i) => (
